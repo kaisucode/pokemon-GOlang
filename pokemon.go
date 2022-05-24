@@ -9,6 +9,13 @@ type Player struct {
 	level *tl.BaseLevel
 }
 
+type Building struct {
+	*tl.Entity
+	title *tl.Text
+	shape *tl.Rectangle
+	level *tl.BaseLevel
+}
+
 func (player *Player) Draw(screen *tl.Screen) {
 	screenWidth, screenHeight := screen.Size()
 	x, y := player.Position()
@@ -39,17 +46,32 @@ func (player *Player) Collide(collision tl.Physical) {
 	}
 }
 
+func InitBuilding(level *tl.BaseLevel) {
+	pokemonCenter := Building{
+		// Entity: tl.NewEntity(1, 1, 1, 1),
+		title: tl.NewText(10, 10, "House", tl.ColorRed, tl.ColorWhite),
+		shape: tl.NewRectangle(10, 10, 10, 5, tl.ColorBlue),
+		level: level,
+	}
+
+	// level.AddEntity(pokemonCenter.Entity)
+	level.AddEntity(pokemonCenter.shape)
+	level.AddEntity(pokemonCenter.title)
+}
+
 func main() {
 	game := tl.NewGame()
 	game.Screen().SetFps(30)
 	level := tl.NewBaseLevel(tl.Cell{
 		Bg: tl.ColorGreen,
 		Fg: tl.ColorBlack,
-		Ch: 'v',
+		Ch: '.',
 	})
-	level.AddEntity(tl.NewRectangle(10, 10, 10, 20, tl.ColorBlue))
 
-	level.AddEntity(tl.NewText(10, 10, "House", tl.ColorRed, tl.ColorWhite))
+	// level.AddEntity(tl.NewRectangle(10, 10, 10, 20, tl.ColorBlue))
+
+	// level.AddEntity(tl.NewText(10, 10, "House", tl.ColorRed, tl.ColorWhite))
+	InitBuilding(level)
 
 	player := Player{
 		Entity: tl.NewEntity(1, 1, 1, 1),
