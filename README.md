@@ -1,5 +1,10 @@
 
 
+## Pokemon Go!!
+
+### Terminal-based Pokemon game, created in golang. Not the AR game. 
+
+
 Entity
 - dialogue
 - trigger battle
