@@ -9,8 +9,8 @@ type Building struct {
 	level *tl.BaseLevel
 }
 
-func InitBuilding(level *tl.BaseLevel) {
-	pokemonCenter := Building{
+func InitBuilding(level *tl.BaseLevel) *Building {
+	aBuilding := Building{
 		// Entity: tl.NewEntity(1, 1, 1, 1),
 		title: tl.NewText(10, 10, "House", tl.ColorRed, tl.ColorWhite),
 		shape: tl.NewRectangle(10, 10, 10, 5, tl.ColorBlue),
@@ -18,6 +18,8 @@ func InitBuilding(level *tl.BaseLevel) {
 	}
 
 	// level.AddEntity(pokemonCenter.Entity)
-	level.AddEntity(pokemonCenter.shape)
-	level.AddEntity(pokemonCenter.title)
+	level.AddEntity(aBuilding.shape)
+	level.AddEntity(aBuilding.title)
+
+	return &aBuilding
 }

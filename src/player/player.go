@@ -1,12 +1,19 @@
 package player
 
-import tl "github.com/JoelOtter/termloop"
+import (
+	"fmt"
+
+	"kaisu/pokemon/src/building"
+
+	tl "github.com/JoelOtter/termloop"
+)
 
 type Player struct {
 	*tl.Entity
-	Level *tl.BaseLevel
-	prevX int
-	prevY int
+	Level     *tl.BaseLevel
+	Locations map[string]*building.Building
+	prevX     int
+	prevY     int
 }
 
 func (player *Player) Draw(screen *tl.Screen) {
@@ -34,6 +41,7 @@ func (player *Player) Tick(event tl.Event) {
 
 func (player *Player) Collide(collision tl.Physical) {
 	// Check if it's a Rectangle we're colliding with
+	fmt.Println(collision)
 	if _, ok := collision.(*tl.Rectangle); ok {
 		player.SetPosition(player.prevX, player.prevY)
 	}
