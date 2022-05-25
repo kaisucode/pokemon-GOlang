@@ -5,6 +5,13 @@
 ### Terminal-based Pokemon game, created in golang. Not the AR game. 
 
 
+
+
+## TODO
+- [ ] Make an output window for console logging
+- [ ] Refurnish the map system
+
+
 Entity
 - dialogue
 - trigger battle
