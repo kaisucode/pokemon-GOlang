@@ -1,8 +1,10 @@
 package main
 
 import (
+	"fmt"
 	"io/ioutil"
 	"kaisu/pokemon/src/building"
+	"kaisu/pokemon/src/console"
 	"kaisu/pokemon/src/player"
 
 	tl "github.com/JoelOtter/termloop"
@@ -34,24 +36,6 @@ func checkErr(err error) {
 	}
 }
 
-func (p *Player) Tick(ev tl.Event) {
-	// Enable arrow key movement
-	if ev.Type == tl.EventKey {
-		x, y := p.Position()
-		switch ev.Key {
-		case tl.KeyArrowRight:
-			x += 1
-		case tl.KeyArrowLeft:
-			x -= 1
-		case tl.KeyArrowUp:
-			y -= 1
-		case tl.KeyArrowDown:
-			y += 1
-		}
-		p.SetPosition(x, y)
-	}
-}
-
 func main() {
 	game.Screen().SetFps(30)
 	level := tl.NewBaseLevel(tl.Cell{
@@ -72,6 +56,8 @@ func main() {
 	err = tl.LoadLevelFromMap(string(lmap), parsers, level)
 	checkErr(err)
 
+	fmt.Println(len(level.Entities))
+
 	locations := make(map[string]*building.Building)
 	pokemonCenter := building.InitBuilding(level)
 	locations["pokemonCenter"] = pokemonCenter
@@ -82,9 +68,14 @@ func main() {
 		Level:     level,
 	}
 
+	textToDisplay := "HELLO WORLD"
+	consoleText := console.ConsoleText{tl.NewText(1, 1, textToDisplay, tl.ColorWhite, tl.ColorBlue), level}
+
 	// Set the character at position (0, 0) on the entity.
-	player.SetCell(0, 0, &tl.Cell{Fg: tl.ColorRed, Ch: '옷'})
+	player.SetCell(0, 0, &tl.Cell{Fg: tl.ColorRed, Ch: '@'})
 	level.AddEntity(&player)
+	game.Screen().AddEntity(&consoleText)
 	game.Screen().SetLevel(level)
+
 	game.Start()
 }

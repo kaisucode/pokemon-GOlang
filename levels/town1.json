@@ -1,5 +1,6 @@
 [
     {
+				"name": "hello",
         "type": "Rectangle",
         "data": {
             "x": 5,

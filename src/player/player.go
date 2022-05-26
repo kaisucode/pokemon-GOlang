@@ -42,17 +42,21 @@ func (player *Player) Tick(event tl.Event) {
 func (player *Player) Collide(collision tl.Physical) {
 	// Check if it's a Rectangle we're colliding with
 	fmt.Println(collision)
-
-	// locate the building structure
-	for key, element := range *(player.Locations) {
-		// in the future, make an extra check so it only searches for buildings in the current map/level
-		if collision.(*tl.Rectangle) == element.Shape {
-			fmt.Println(key, element)
-		}
-	}
+	// fmt.Println("--------")
 
 	// block from moving
 	if _, ok := collision.(*tl.Rectangle); ok {
 		player.SetPosition(player.prevX, player.prevY)
+
+		// locate the building structure, only if collided
+		for key, element := range *(player.Locations) {
+
+			foundElement := (collision.(*tl.Rectangle) == element.Shape)
+
+			// in the future, make an extra check so it only searches for buildings in the current map/level
+			if foundElement {
+				fmt.Println(key, element)
+			}
+		}
 	}
 }
