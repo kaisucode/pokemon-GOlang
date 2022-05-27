@@ -41,7 +41,7 @@ func (player *Player) Tick(event tl.Event) {
 
 func (player *Player) Collide(collision tl.Physical) {
 	// Check if it's a Rectangle we're colliding with
-	fmt.Println(collision)
+	// fmt.Println(collision)
 	// fmt.Println("--------")
 
 	// block from moving

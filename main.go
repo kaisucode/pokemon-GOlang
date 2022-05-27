@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"io/ioutil"
 	"kaisu/pokemon/src/building"
 	"kaisu/pokemon/src/console"
@@ -56,7 +55,9 @@ func main() {
 	err = tl.LoadLevelFromMap(string(lmap), parsers, level)
 	checkErr(err)
 
-	fmt.Println(len(level.Entities))
+	consoleText := console.NewConsoleText(game.Screen(), level)
+	consoleText.SetText("new text!!")
+	// fmt.Println(len(level.Entities))
 
 	locations := make(map[string]*building.Building)
 	pokemonCenter := building.InitBuilding(level)
@@ -68,13 +69,9 @@ func main() {
 		Level:     level,
 	}
 
-	textToDisplay := "HELLO WORLD"
-	consoleText := console.ConsoleText{tl.NewText(1, 1, textToDisplay, tl.ColorWhite, tl.ColorBlue), level}
-
 	// Set the character at position (0, 0) on the entity.
 	player.SetCell(0, 0, &tl.Cell{Fg: tl.ColorRed, Ch: '@'})
 	level.AddEntity(&player)
-	game.Screen().AddEntity(&consoleText)
 	game.Screen().SetLevel(level)
 
 	game.Start()
