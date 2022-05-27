@@ -2,6 +2,7 @@ package main
 
 import (
 	"io/ioutil"
+	"kaisu/pokemon/constants"
 	"kaisu/pokemon/src/building"
 	"kaisu/pokemon/src/console"
 	"kaisu/pokemon/src/player"
@@ -55,8 +56,9 @@ func main() {
 	err = tl.LoadLevelFromMap(string(lmap), parsers, level)
 	checkErr(err)
 
-	consoleText := console.NewConsoleText(game.Screen(), level)
-	consoleText.SetText("new text!!")
+	constants.CONSOLE_TEXT = console.NewConsoleText(game.Screen(), level)
+	// consoleText.SetText("new text!!")
+	constants.CONSOLE_TEXT.SetText(constants.DISPLAYED_TEXT)
 	// fmt.Println(len(level.Entities))
 
 	locations := make(map[string]*building.Building)

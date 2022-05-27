@@ -2,7 +2,9 @@ package player
 
 import (
 	"fmt"
+	"kaisu/pokemon/constants"
 	"kaisu/pokemon/src/building"
+	"strconv"
 
 	tl "github.com/JoelOtter/termloop"
 )
@@ -36,6 +38,9 @@ func (player *Player) Tick(event tl.Event) {
 		case tl.KeyArrowDown:
 			player.SetPosition(player.prevX, player.prevY+1)
 		}
+
+		curX, curY := player.Position()
+		constants.CONSOLE_TEXT.SetText("(" + strconv.Itoa(curX) + ", " + strconv.Itoa(curY) + ")")
 	}
 }
 
