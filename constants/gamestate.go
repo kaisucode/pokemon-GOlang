@@ -1,6 +1,10 @@
 package constants
 
-import "kaisu/pokemon/src/console"
+import (
+	"kaisu/pokemon/src/console"
+
+	tl "github.com/JoelOtter/termloop"
+)
 
 // "io/ioutil"
 // "kaisu/pokemon/constants"
@@ -12,3 +16,4 @@ import "kaisu/pokemon/src/console"
 const DISPLAYED_TEXT = "hello from the constants file"
 
 var CONSOLE_TEXT *console.ConsoleText
+var GAME *tl.Game

@@ -8,9 +8,13 @@
 
 
 ## TODO
-- [ ] Set up global pointers
+- [x] Set up global pointers
 - [x] Make an output window for console logging
 - [ ] Refurnish the map system
+
+
+## Bugs
+- [ ] console text gets shifted when the player is held in place by obstacles
 
 
 Entity

@@ -3,14 +3,13 @@ package main
 import (
 	"io/ioutil"
 	"kaisu/pokemon/constants"
+	"kaisu/pokemon/constants/playerstate"
 	"kaisu/pokemon/src/building"
 	"kaisu/pokemon/src/console"
 	"kaisu/pokemon/src/player"
 
 	tl "github.com/JoelOtter/termloop"
 )
-
-var game = tl.NewGame()
 
 type Player struct {
 	*tl.Entity
@@ -37,7 +36,9 @@ func checkErr(err error) {
 }
 
 func main() {
-	game.Screen().SetFps(30)
+
+	constants.GAME = tl.NewGame()
+	constants.GAME.Screen().SetFps(30)
 	level := tl.NewBaseLevel(tl.Cell{
 		Bg: tl.ColorGreen,
 		Fg: tl.ColorBlack,
@@ -56,25 +57,25 @@ func main() {
 	err = tl.LoadLevelFromMap(string(lmap), parsers, level)
 	checkErr(err)
 
-	constants.CONSOLE_TEXT = console.NewConsoleText(game.Screen(), level)
-	// consoleText.SetText("new text!!")
+	constants.CONSOLE_TEXT = console.NewConsoleText(constants.GAME.Screen(), level)
 	constants.CONSOLE_TEXT.SetText(constants.DISPLAYED_TEXT)
+	// consoleText.SetText("new text!!")
 	// fmt.Println(len(level.Entities))
 
 	locations := make(map[string]*building.Building)
 	pokemonCenter := building.InitBuilding(level)
 	locations["pokemonCenter"] = pokemonCenter
 
-	player := player.Player{
+	playerstate.PLAYER = &player.Player{
 		Entity:    tl.NewEntity(1, 1, 1, 1),
 		Locations: &locations,
 		Level:     level,
 	}
 
 	// Set the character at position (0, 0) on the entity.
-	player.SetCell(0, 0, &tl.Cell{Fg: tl.ColorRed, Ch: '@'})
-	level.AddEntity(&player)
-	game.Screen().SetLevel(level)
+	playerstate.PLAYER.SetCell(0, 0, &tl.Cell{Fg: tl.ColorRed, Ch: '@'})
+	level.AddEntity(playerstate.PLAYER)
+	constants.GAME.Screen().SetLevel(level)
 
-	game.Start()
+	constants.GAME.Start()
 }
