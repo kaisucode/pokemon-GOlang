@@ -3,18 +3,14 @@ package player
 import (
 	"fmt"
 	"kaisu/pokemon/constants"
-	"kaisu/pokemon/src/building"
 	"strconv"
 
 	tl "github.com/JoelOtter/termloop"
 )
 
-type BuildingEntries = map[string](*building.Building)
-
 type Player struct {
 	*tl.Entity
 	Level        *tl.BaseLevel
-	Locations    *BuildingEntries
 	prevX, prevY int
 }
 
@@ -54,7 +50,7 @@ func (player *Player) Collide(collision tl.Physical) {
 		player.SetPosition(player.prevX, player.prevY)
 
 		// locate the building structure, only if collided
-		for key, element := range *(player.Locations) {
+		for key, element := range constants.LOCATIONS {
 
 			foundElement := (collision.(*tl.Rectangle) == element.Shape)
 
