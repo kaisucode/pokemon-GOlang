@@ -6,34 +6,12 @@ import (
 	"kaisu/pokemon/constants/playerstate"
 	"kaisu/pokemon/src/building"
 	"kaisu/pokemon/src/console"
+	"kaisu/pokemon/src/mapparser"
 	"kaisu/pokemon/src/player"
+	. "kaisu/pokemon/src/utils"
 
 	tl "github.com/JoelOtter/termloop"
 )
-
-type Player struct {
-	*tl.Entity
-}
-
-// Here we define a parse function for reading a Player out of JSON.
-func parsePlayer(data map[string]interface{}) tl.Drawable {
-	e := tl.NewEntity(
-		int(data["x"].(float64)),
-		int(data["y"].(float64)),
-		1, 1,
-	)
-	e.SetCell(0, 0, &tl.Cell{
-		Ch: []rune(data["ch"].(string))[0],
-		Fg: tl.Attr(data["color"].(float64)),
-	})
-	return &Player{e}
-}
-
-func checkErr(err error) {
-	if err != nil {
-		panic(err)
-	}
-}
 
 func main() {
 
@@ -46,21 +24,20 @@ func main() {
 	})
 
 	// level.AddEntity(tl.NewRectangle(10, 10, 10, 20, tl.ColorBlue))
-
 	// level.AddEntity(tl.NewText(10, 10, "House", tl.ColorRed, tl.ColorWhite))
-
 	// l := tl.NewBaseLevel(tl.Cell{Bg: 76, Fg: 1})
+	// consoleText.SetText("new text!!")
+	// fmt.Println(len(level.Entities))
+
 	lmap, err := ioutil.ReadFile("levels/town1.json")
-	checkErr(err)
+	CheckErr(err)
 	parsers := make(map[string]tl.EntityParser)
-	parsers["Player"] = parsePlayer
+	parsers["Player"] = mapparser.ParsePlayer
 	err = tl.LoadLevelFromMap(string(lmap), parsers, level)
-	checkErr(err)
+	CheckErr(err)
 
 	constants.CONSOLE_TEXT = console.NewConsoleText(constants.GAME.Screen(), level)
 	constants.CONSOLE_TEXT.SetText(constants.DISPLAYED_TEXT)
-	// consoleText.SetText("new text!!")
-	// fmt.Println(len(level.Entities))
 
 	locations := make(map[string]*building.Building)
 	pokemonCenter := building.InitBuilding(level)

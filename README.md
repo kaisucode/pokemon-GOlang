@@ -11,6 +11,10 @@
 - [x] Set up global pointers
 - [x] Make an output window for console logging
 - [ ] Refurnish the map system
+- [ ] Going into different loading zones
+- [ ] Grass and RNG pokemon spawning
+- [ ] Battle mode
+- [ ] NPCs, basically a single-pixel building
 
 
 ## Bugs
