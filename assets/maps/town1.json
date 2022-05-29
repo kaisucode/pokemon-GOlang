@@ -1,25 +1,26 @@
 [
-    {
-				"name": "hello",
-        "type": "Rectangle",
-        "data": {
-            "x": 5,
-            "y": 8,
-            "width": 20,
-            "height": 7,
-            "color": 67
-        }
-    },
-    {
-        "type": "Rectangle",
-        "data": {
-            "x": 7,
-            "y": 9,
-            "width": 25,
-            "height": 9,
-            "color": 35
-        }
-    },
+		{
+			"type": "Building",
+			"data": {
+				"name": "Home",
+				"x": 40,
+				"y": 40,
+				"width": 20,
+				"height": 7,
+				"color": 67
+			}
+		},
+		{
+			"type": "Building",
+			"data": {
+				"name": "Npc House",
+				"x": 5,
+				"y": 8,
+				"width": 20,
+				"height": 7,
+				"color": 67
+			}
+		},
     {
         "type": "Text",
         "data": {

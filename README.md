@@ -10,14 +10,19 @@
 ## TODO
 - [x] Set up global pointers
 - [x] Make an output window for console logging
+- [ ] more extensive logging system (write to file)
+- [ ] Message queue for console logging
+
 - [ ] Refurnish the map system
 - [ ] Going into different loading zones
 - [ ] Grass and RNG pokemon spawning
 - [ ] Battle mode
 - [ ] NPCs, basically a single-pixel building
+- [ ] Rendering sprite frames
 
 
 ## Bugs
+- [x] collision is messed up (urgent fix)
 - [ ] console text gets shifted when the player is held in place by obstacles
 
 
