@@ -5,6 +5,8 @@ import (
 	"kaisu/pokemon/constants"
 	"kaisu/pokemon/constants/mapstate"
 	"kaisu/pokemon/src/building"
+
+	// . "kaisu/pokemon/src/utils"
 	"strconv"
 
 	tl "github.com/JoelOtter/termloop"
@@ -55,20 +57,18 @@ func (player *Player) Collide(collision tl.Physical) {
 	case building.Building:
 		constants.CONSOLE_TEXT.SetText("collided with building: " + collisionObject)
 		player.SetPosition(player.prevX, player.prevY)
+		constants.CONSOLE_TEXT.SetPrevPosition()
 		// block from moving
 
 		// locate the building structure, only if collided
-		for buildingName, element := range mapstate.LOCATIONS {
+		for matchingName, matchingBuilding := range mapstate.LOCATIONS {
 
-			// temp, ok := collision.(*building.Building)
-			// use(temp, ok)
-			// foundElement := (collision.(*building.Building) == element)
-			foundElement := (buildingName == element.Name)
+			collidedBuilding, _ := collision.(building.Building)
+			if collidedBuilding.Name == matchingBuilding.Name {
+				constants.CONSOLE_TEXT.SetText("collided with building name: " + matchingName)
+			}
 
 			// in the future, make an extra check so it only searches for buildings in the current map/level
-			if foundElement {
-				constants.CONSOLE_TEXT.SetText("collided with building name: " + buildingName)
-			}
 		}
 	default:
 		constants.CONSOLE_TEXT.SetText("collided with something: " + collisionObject)

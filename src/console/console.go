@@ -6,27 +6,38 @@ import (
 
 type ConsoleText struct {
 	*tl.Text
+	prevX, prevY int
 }
 
 func (consoleText *ConsoleText) Draw(screen *tl.Screen) {
 	consoleText.Text.Draw(screen)
 }
 
-func (m *ConsoleText) Tick(ev tl.Event) {
+func (consoleText *ConsoleText) SetPrevPosition() {
+	consoleText.SetPosition(consoleText.prevX, consoleText.prevY)
+
+}
+
+func (consoleText *ConsoleText) Tick(ev tl.Event) {
 	// Enable arrow key movement
 	if ev.Type == tl.EventKey {
-		x, y := m.Position()
+		// x, y := m.Position()
+		consoleText.prevX, consoleText.prevY = consoleText.Position()
+
 		switch ev.Key {
 		case tl.KeyArrowRight:
-			x += 1
+			consoleText.SetPosition(consoleText.prevX+1, consoleText.prevY)
 		case tl.KeyArrowLeft:
-			x -= 1
+			consoleText.SetPosition(consoleText.prevX-1, consoleText.prevY)
 		case tl.KeyArrowUp:
-			y -= 1
+			consoleText.SetPosition(consoleText.prevX, consoleText.prevY-1)
 		case tl.KeyArrowDown:
-			y += 1
+			consoleText.SetPosition(consoleText.prevX, consoleText.prevY+1)
 		}
-		m.SetPosition(x, y)
+
+		curX, curY := consoleText.Position()
+
+		consoleText.SetPosition(curX, curY)
 	}
 }
 
@@ -47,7 +58,10 @@ func NewConsoleText(screen *tl.Screen, level *tl.BaseLevel) *ConsoleText {
 	yPos := screenHeight/2 + 24
 
 	textToDisplay := "HELLO WORLD"
-	consoleText := ConsoleText{tl.NewText(xPos, yPos, textToDisplay, tl.ColorWhite, tl.ColorBlack)}
+	consoleText := ConsoleText{
+		tl.NewText(xPos, yPos, textToDisplay, tl.ColorWhite, tl.ColorBlack),
+		0, 0,
+	}
 	level.AddEntity(&consoleText)
 
 	return &consoleText

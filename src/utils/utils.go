@@ -12,4 +12,4 @@ func CheckErr(err error) {
 	}
 }
 
-func use(...interface{}) {}
+func Use(...interface{}) {}

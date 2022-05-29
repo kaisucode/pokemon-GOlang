@@ -23,7 +23,7 @@
 
 ## Bugs
 - [x] collision is messed up (urgent fix)
-- [ ] console text gets shifted when the player is held in place by obstacles
+- [x] console text gets shifted when the player is held in place by obstacles
 
 
 Entity
