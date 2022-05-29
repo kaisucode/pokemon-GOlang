@@ -11,3 +11,5 @@ func CheckErr(err error) {
 		panic(err)
 	}
 }
+
+func use(...interface{}) {}

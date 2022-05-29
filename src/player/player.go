@@ -41,8 +41,6 @@ func (player *Player) Tick(event tl.Event) {
 	}
 }
 
-func use(...interface{}) {}
-
 func (player *Player) Collide(collision tl.Physical) {
 
 	// temp, ok := collision.(*building.Building)
@@ -56,11 +54,14 @@ func (player *Player) Collide(collision tl.Physical) {
 	switch collision.(type) {
 	case building.Building:
 		constants.CONSOLE_TEXT.SetText("collided with building: " + collisionObject)
+		player.SetPosition(player.prevX, player.prevY)
+		// block from moving
+
 		// locate the building structure, only if collided
 		for buildingName, element := range mapstate.LOCATIONS {
 
-			temp, ok := collision.(*building.Building)
-			use(temp, ok)
+			// temp, ok := collision.(*building.Building)
+			// use(temp, ok)
 			// foundElement := (collision.(*building.Building) == element)
 			foundElement := (buildingName == element.Name)
 
@@ -71,27 +72,6 @@ func (player *Player) Collide(collision tl.Physical) {
 		}
 	default:
 		constants.CONSOLE_TEXT.SetText("collided with something: " + collisionObject)
-	}
-
-	// fmt.Printf("%+v\n", collision)
-	// if _, ok := collision.(*tl.Entity); ok {
-	//   constants.CONSOLE_TEXT.SetText("collided with entity")
-	// }
-
-	if _, ok := collision.(*building.Building); ok {
-		// block from moving
-		player.SetPosition(player.prevX, player.prevY)
-
-		// locate the building structure, only if collided
-		for buildingName, element := range mapstate.LOCATIONS {
-
-			foundElement := (collision.(*building.Building) == element)
-
-			// in the future, make an extra check so it only searches for buildings in the current map/level
-			if foundElement {
-				constants.CONSOLE_TEXT.SetText("collided with building name: " + buildingName)
-			}
-		}
 	}
 
 	if _, ok := collision.(*tl.Rectangle); ok {

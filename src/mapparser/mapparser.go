@@ -33,9 +33,11 @@ func ParseBuildings(data map[string]interface{}) tl.Drawable {
 
 	newBuilding := building.NewBuilding(data)
 	name := string(data["name"].(string))
-
 	mapstate.LOCATIONS[name] = newBuilding
 	// return newBuilding
+
+	// generate warp point
+	// return warp point
 
 	e := tl.NewEntity(
 		int(data["x"].(float64)),

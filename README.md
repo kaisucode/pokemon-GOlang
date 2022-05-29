@@ -13,7 +13,7 @@
 - [ ] more extensive logging system (write to file)
 - [ ] Message queue for console logging
 
-- [ ] Refurnish the map system
+- [x] Refurnish the map system
 - [ ] Going into different loading zones
 - [ ] Grass and RNG pokemon spawning
 - [ ] Battle mode
