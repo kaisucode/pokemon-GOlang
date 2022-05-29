@@ -10,8 +10,8 @@
 ## TODO
 - [x] Set up global pointers
 - [x] Make an output window for console logging
-- [ ] more extensive logging system (write to file)
-- [ ] Message queue for console logging
+- [x] more extensive logging system (write to file)
+- [x] Message queue for console logging
 
 - [x] Refurnish the map system
 - [ ] Going into different loading zones

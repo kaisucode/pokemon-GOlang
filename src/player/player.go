@@ -43,22 +43,21 @@ func (player *Player) Tick(event tl.Event) {
 	}
 }
 
-func (player *Player) Collide(collision tl.Physical) {
+func (player *Player) SetPrevPosition() {
+	player.SetPosition(player.prevX, player.prevY)
+}
 
-	// temp, ok := collision.(*building.Building)
-	// huh := collision.(*building.Building)
-	// constants.CONSOLE_TEXT.SetText("huh: " + string(huh))
-	// constants.CONSOLE_TEXT.SetText("temp: " + string(temp))
-	// constants.CONSOLE_TEXT.SetText("ok: %t", ok)
+func (player *Player) Collide(collision tl.Physical) {
 
 	collisionObject := fmt.Sprintf("%+v\n", collision)
 
 	switch collision.(type) {
 	case building.Building:
 		constants.CONSOLE_TEXT.SetText("collided with building: " + collisionObject)
-		player.SetPosition(player.prevX, player.prevY)
-		constants.CONSOLE_TEXT.SetPrevPosition()
+
 		// block from moving
+		player.SetPrevPosition()
+		constants.CONSOLE_TEXT.SetPrevPosition()
 
 		// locate the building structure, only if collided
 		for matchingName, matchingBuilding := range mapstate.LOCATIONS {
@@ -74,15 +73,15 @@ func (player *Player) Collide(collision tl.Physical) {
 		constants.CONSOLE_TEXT.SetText("collided with something: " + collisionObject)
 	}
 
-	if _, ok := collision.(*tl.Rectangle); ok {
-		player.SetPosition(player.prevX, player.prevY)
-		constants.CONSOLE_TEXT.SetText("collided with rectangle")
-		// locate the building structure, only if collided
-		for key, element := range mapstate.LOCATIONS {
-			foundElement := (collision.(*tl.Rectangle) == element.Rectangle)
-			if foundElement {
-				fmt.Println(key, element)
-			}
-		}
-	}
+	// if _, ok := collision.(*tl.Rectangle); ok {
+	//   player.SetPosition(player.prevX, player.prevY)
+	//   constants.CONSOLE_TEXT.SetText("collided with rectangle")
+	//   // locate the building structure, only if collided
+	//   for key, element := range mapstate.LOCATIONS {
+	//     foundElement := (collision.(*tl.Rectangle) == element.Rectangle)
+	//     if foundElement {
+	//       fmt.Println(key, element)
+	//     }
+	//   }
+	// }
 }

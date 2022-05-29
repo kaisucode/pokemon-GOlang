@@ -1,12 +1,26 @@
 package console
 
 import (
+	"kaisu/pokemon/constants/logger"
+
 	tl "github.com/JoelOtter/termloop"
 )
 
 type ConsoleText struct {
 	*tl.Text
+	logs         []string
 	prevX, prevY int
+}
+
+func (consoleText *ConsoleText) AddMessage(newMessage string) {
+	// consoleText.logs = append(consoleText.logs, newMessage)
+	logger.INFO.Println(newMessage)
+}
+
+func (consoleText *ConsoleText) SetText(newMessage string) {
+	// consoleText.logs = append(consoleText.logs, newMessage)
+	consoleText.Text.SetText(newMessage)
+	logger.INFO.Println(newMessage)
 }
 
 func (consoleText *ConsoleText) Draw(screen *tl.Screen) {
@@ -15,7 +29,6 @@ func (consoleText *ConsoleText) Draw(screen *tl.Screen) {
 
 func (consoleText *ConsoleText) SetPrevPosition() {
 	consoleText.SetPosition(consoleText.prevX, consoleText.prevY)
-
 }
 
 func (consoleText *ConsoleText) Tick(ev tl.Event) {
@@ -60,6 +73,7 @@ func NewConsoleText(screen *tl.Screen, level *tl.BaseLevel) *ConsoleText {
 	textToDisplay := "HELLO WORLD"
 	consoleText := ConsoleText{
 		tl.NewText(xPos, yPos, textToDisplay, tl.ColorWhite, tl.ColorBlack),
+		make([]string, 10),
 		0, 0,
 	}
 	level.AddEntity(&consoleText)
