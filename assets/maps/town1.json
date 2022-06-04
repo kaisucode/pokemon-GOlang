@@ -3,6 +3,7 @@
 			"type": "Building",
 			"data": {
 				"name": "Home",
+				"url": "assets/maps/pkmncenter1.json",
 				"x": 40,
 				"y": 40,
 				"width": 20,
@@ -14,6 +15,7 @@
 			"type": "Building",
 			"data": {
 				"name": "Pokemon Center",
+				"url": "assets/maps/pkmncenter1.json",
 				"x": 5,
 				"y": 8,
 				"width": 20,

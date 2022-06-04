@@ -71,13 +71,24 @@ func ParseBuildings(data map[string]interface{}) tl.Drawable {
 	// pokemonCenter := building.InitBuilding(constants.CURLEVEL)
 	// pokemonCenter := building.NewBuilding()
 
-	newBuilding := building.NewBuilding(data)
+	xPos := int(data["x"].(float64))
+	yPos := int(data["y"].(float64))
+	url := string(data["url"].(string))
 	name := string(data["name"].(string))
+
+	newBuilding := building.NewBuilding(data)
 	mapstate.LOCATIONS[name] = newBuilding
 	// return newBuilding
 
 	// generate warp point
 	// return warp point
+
+	// warpPoint := building.NewWarppoint(xPos, yPos, url)
+	warpPoint := building.NewWarppoint(xPos-1, yPos+3, url)
+	Use(warpPoint, xPos, yPos)
+	Use(xPos, yPos, url)
+
+	// return &warpPoint
 
 	e := tl.NewEntity(
 		int(data["x"].(float64)),
@@ -141,8 +152,7 @@ func LoadRoom(fileurl string) {
 
 	parsers := make(map[string]tl.EntityParser)
 	parsers["Player"] = ParsePlayer
-	parsers["Building"] = ParseBuildings // handles collision rects and warp points
-	parsers["Room"] = ParseRooms         // handles collision rects and warp points
+	parsers["Room"] = ParseRooms
 	// parsers["Npc"] = mapparser.ParsePlayer
 	// parsers["Grass"] = mapparser.ParsePlayer
 	err = tl.LoadLevelFromMap(string(lmap), parsers, constants.CURLEVEL)

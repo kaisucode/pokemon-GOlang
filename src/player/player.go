@@ -52,6 +52,10 @@ func (player *Player) Collide(collision tl.Physical) {
 	collisionObject := fmt.Sprintf("%+v\n", collision)
 
 	switch collision.(type) {
+	case building.Warppoint:
+		constants.CONSOLE_TEXT.SetText("collided with warpPoint: " + collisionObject)
+		collidedWarppoint, _ := collision.(building.Warppoint)
+		// mapparser.LoadMapLevel(collidedWarppoint.url)
 	case building.Building:
 		constants.CONSOLE_TEXT.SetText("collided with building: " + collisionObject)
 
