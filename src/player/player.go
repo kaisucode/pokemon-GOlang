@@ -6,7 +6,7 @@ import (
 	"kaisu/pokemon/constants/mapstate"
 	"kaisu/pokemon/src/building"
 
-	// . "kaisu/pokemon/src/utils"
+	. "kaisu/pokemon/src/utils"
 	"strconv"
 
 	tl "github.com/JoelOtter/termloop"
@@ -55,6 +55,7 @@ func (player *Player) Collide(collision tl.Physical) {
 	case building.Warppoint:
 		constants.CONSOLE_TEXT.SetText("collided with warpPoint: " + collisionObject)
 		collidedWarppoint, _ := collision.(building.Warppoint)
+		Use(collidedWarppoint)
 		// mapparser.LoadMapLevel(collidedWarppoint.url)
 	case building.Building:
 		constants.CONSOLE_TEXT.SetText("collided with building: " + collisionObject)

@@ -6,7 +6,7 @@ import (
 	"kaisu/pokemon/constants/mapstate"
 	"kaisu/pokemon/src/building"
 	"kaisu/pokemon/src/console"
-	"kaisu/pokemon/src/mapparser"
+	"kaisu/pokemon/src/maploader"
 	"log"
 	"os"
 
@@ -37,8 +37,8 @@ func main() {
 	// l := tl.NewBaseLevel(tl.Cell{Bg: 76, Fg: 1})
 	// fmt.Println(len(level.Entities))
 
-	mapparser.LoadMapLevel("assets/maps/town1.json")
-	// mapparser.LoadRoom("assets/maps/pkmncenter1.json")
+	maploader.LoadMapLevel("assets/maps/town1.json")
+	// maploader.LoadRoom("assets/maps/pkmncenter1.json")
 
 	constants.CONSOLE_TEXT = console.NewConsoleText(constants.GAME.Screen(), constants.CURLEVEL)
 	constants.CONSOLE_TEXT.SetText(constants.DISPLAYED_TEXT)
