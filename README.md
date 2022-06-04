@@ -5,6 +5,8 @@
 ### Terminal-based Pokemon game, created in golang. Not the AR game. 
 
 
+## Run instructions
+- Run `go run main.go` in the project root
 
 
 ## TODO

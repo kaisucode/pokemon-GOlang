@@ -38,6 +38,7 @@ func main() {
 	// fmt.Println(len(level.Entities))
 
 	mapparser.LoadMapLevel("assets/maps/town1.json")
+	// mapparser.LoadRoom("assets/maps/pkmncenter1.json")
 
 	constants.CONSOLE_TEXT = console.NewConsoleText(constants.GAME.Screen(), constants.CURLEVEL)
 	constants.CONSOLE_TEXT.SetText(constants.DISPLAYED_TEXT)

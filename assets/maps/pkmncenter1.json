@@ -1,0 +1,33 @@
+[
+		{
+			"type": "Room",
+			"data": {
+				"name": "Starting Town Pokemon Center",
+				"x": -30,
+				"y": -10,
+				"width": 60,
+				"height": 20,
+				"color": 91
+			}
+		},
+    {
+        "type": "Entity",
+        "data": {
+            "x": -100,
+            "y": -22,
+            "text": "assets/pokemon-logo.txt",
+            "fg": "",
+            "bg": ""
+        }
+    },
+    {
+        "type": "Player",
+        "data": {
+            "x": 0,
+            "y": 0,
+            "ch": "@",
+            "color": 91
+        }
+    }
+]
+

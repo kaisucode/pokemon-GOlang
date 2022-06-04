@@ -13,7 +13,7 @@
 		{
 			"type": "Building",
 			"data": {
-				"name": "Npc House",
+				"name": "Pokemon Center",
 				"x": 5,
 				"y": 8,
 				"width": 20,
@@ -26,7 +26,7 @@
         "data": {
             "x": 7,
             "y": 4,
-            "text": "Hello! The thing to the right is a chess board.",
+            "text": "Welcome to the starting town",
             "fg": 70,
             "bg": 53
         }
