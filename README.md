@@ -16,9 +16,9 @@
 - [x] Message queue for console logging
 
 - [x] Refurnish the map system
+- [x] Going into different loading zones
 - [ ] Store current room state
 - [ ] Make players unable to step out of rooms unless by portal
-- [ ] Going into different loading zones
 - [ ] Grass and RNG pokemon spawning
 - [ ] Battle mode
 - [ ] NPCs, basically a single-pixel building

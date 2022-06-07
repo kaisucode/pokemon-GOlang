@@ -5,6 +5,7 @@ import (
 	"kaisu/pokemon/constants"
 	"kaisu/pokemon/constants/mapstate"
 	"kaisu/pokemon/src/building"
+	"kaisu/pokemon/src/maploader"
 
 	. "kaisu/pokemon/src/utils"
 	"strconv"
@@ -53,10 +54,15 @@ func (player *Player) Collide(collision tl.Physical) {
 
 	switch collision.(type) {
 	case building.Warppoint:
-		constants.CONSOLE_TEXT.SetText("collided with warpPoint: " + collisionObject)
+		// constants.CONSOLE_TEXT.SetText("collided with warpPoint: " + collisionObject)
 		collidedWarppoint, _ := collision.(building.Warppoint)
 		Use(collidedWarppoint)
-		// mapparser.LoadMapLevel(collidedWarppoint.url)
+		constants.CONSOLE_TEXT.SetText("collided with warpPoint going to url: " + collidedWarppoint.Url)
+		maploader.LoadRoom(collidedWarppoint.Url)
+		player.SetPosition(1, 1)
+		constants.CURLEVEL.AddEntity(player)
+		constants.GAME.Screen().SetLevel(constants.CURLEVEL)
+
 	case building.Building:
 		constants.CONSOLE_TEXT.SetText("collided with building: " + collisionObject)
 

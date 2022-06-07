@@ -4,9 +4,11 @@ import (
 	"kaisu/pokemon/constants"
 	"kaisu/pokemon/constants/logger"
 	"kaisu/pokemon/constants/mapstate"
+	"kaisu/pokemon/constants/playerstate"
 	"kaisu/pokemon/src/building"
 	"kaisu/pokemon/src/console"
 	"kaisu/pokemon/src/maploader"
+	"kaisu/pokemon/src/player"
 	"log"
 	"os"
 
@@ -39,6 +41,15 @@ func main() {
 
 	maploader.LoadMapLevel("assets/maps/town1.json")
 	// maploader.LoadRoom("assets/maps/pkmncenter1.json")
+
+	// render player
+	playerstate.PLAYER = &player.Player{
+		Entity: tl.NewEntity(1, 1, 1, 1),
+	}
+
+	// Set the character at position (0, 0) on the entity.
+	playerstate.PLAYER.SetCell(0, 0, &tl.Cell{Fg: tl.ColorRed, Ch: '@'})
+	constants.CURLEVEL.AddEntity(playerstate.PLAYER)
 
 	constants.CONSOLE_TEXT = console.NewConsoleText(constants.GAME.Screen(), constants.CURLEVEL)
 	constants.CONSOLE_TEXT.SetText(constants.DISPLAYED_TEXT)

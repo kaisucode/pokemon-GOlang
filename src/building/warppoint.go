@@ -9,7 +9,7 @@ import (
 type Warppoint struct {
 	// *tl.Entity
 	*tl.Rectangle
-	url string
+	Url string
 }
 
 func NewWarppoint(xPos int, yPos int, url string) *Warppoint {
@@ -22,7 +22,7 @@ func NewWarppoint(xPos int, yPos int, url string) *Warppoint {
 
 	aWarppoint := Warppoint{
 		Rectangle: tl.NewRectangle(xPos, yPos, 1, 1, tl.ColorBlue),
-		url:       url,
+		Url:       url,
 	}
 	// Entity: tl.NewEntity(1, 1, 1, 1),
 	// Shape: tl.NewRectangle(xPos, yPos, width, height, tl.ColorBlue),

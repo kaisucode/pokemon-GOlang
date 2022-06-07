@@ -3,16 +3,15 @@ package maploader
 import (
 	"io/ioutil"
 	"kaisu/pokemon/constants"
-	"kaisu/pokemon/constants/playerstate"
 
 	"kaisu/pokemon/src/mapparser"
-	"kaisu/pokemon/src/player"
 	. "kaisu/pokemon/src/utils"
 
 	tl "github.com/JoelOtter/termloop"
 )
 
 func LoadMapLevel(fileurl string) {
+	// constants.CONSOLE_TEXT.SetText("loading map level of file: ")
 
 	// create a base level
 	constants.CURLEVEL = tl.NewBaseLevel(tl.Cell{
@@ -32,14 +31,6 @@ func LoadMapLevel(fileurl string) {
 	err = tl.LoadLevelFromMap(string(lmap), parsers, constants.CURLEVEL)
 	CheckErr(err)
 
-	// render player
-	playerstate.PLAYER = &player.Player{
-		Entity: tl.NewEntity(1, 1, 1, 1),
-	}
-
-	// Set the character at position (0, 0) on the entity.
-	playerstate.PLAYER.SetCell(0, 0, &tl.Cell{Fg: tl.ColorRed, Ch: '@'})
-	constants.CURLEVEL.AddEntity(playerstate.PLAYER)
 }
 
 func LoadRoom(fileurl string) {
@@ -60,13 +51,4 @@ func LoadRoom(fileurl string) {
 	// parsers["Grass"] = mapparser.ParsePlayer
 	err = tl.LoadLevelFromMap(string(lmap), parsers, constants.CURLEVEL)
 	CheckErr(err)
-
-	// render player
-	playerstate.PLAYER = &player.Player{
-		Entity: tl.NewEntity(1, 1, 1, 1),
-	}
-
-	// Set the character at position (0, 0) on the entity.
-	playerstate.PLAYER.SetCell(0, 0, &tl.Cell{Fg: tl.ColorRed, Ch: '@'})
-	constants.CURLEVEL.AddEntity(playerstate.PLAYER)
 }
