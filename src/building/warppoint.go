@@ -9,10 +9,11 @@ import (
 type Warppoint struct {
 	// *tl.Entity
 	*tl.Rectangle
-	Url string
+	Url  string
+	Type string
 }
 
-func NewWarppoint(xPos int, yPos int, url string) *Warppoint {
+func NewWarppoint(xPos int, yPos int, url string, warpType string) *Warppoint {
 	// xPos := int(data["x"].(float64))
 	// yPos := int(data["y"].(float64))
 	// width := int(data["width"].(float64))
@@ -23,6 +24,7 @@ func NewWarppoint(xPos int, yPos int, url string) *Warppoint {
 	aWarppoint := Warppoint{
 		Rectangle: tl.NewRectangle(xPos, yPos, 1, 1, tl.ColorBlue),
 		Url:       url,
+		Type:      warpType,
 	}
 	// Entity: tl.NewEntity(1, 1, 1, 1),
 	// Shape: tl.NewRectangle(xPos, yPos, width, height, tl.ColorBlue),

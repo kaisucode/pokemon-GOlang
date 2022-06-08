@@ -36,11 +36,19 @@ func ParseRooms(data map[string]interface{}) tl.Drawable {
 	newRoom := room.NewRoom(data)
 	name := string(data["name"].(string))
 	Use(newRoom, name)
+	xPos := int(data["x"].(float64))
+	yPos := int(data["y"].(float64))
+	url := string(data["url"].(string))
+	warpType := string(data["warpType"].(string))
 	// mapstate.LOCATIONS[name] = newRoom
 	// return newBuilding
 
 	// generate warp point
 	// return warp point
+
+	warpPoint := building.NewWarppoint(xPos-1, yPos+3, url, warpType)
+	Use(warpPoint, xPos, yPos)
+	Use(xPos, yPos, url)
 
 	e := tl.NewEntity(
 		int(data["x"].(float64)),
@@ -70,6 +78,7 @@ func ParseBuildings(data map[string]interface{}) tl.Drawable {
 	xPos := int(data["x"].(float64))
 	yPos := int(data["y"].(float64))
 	url := string(data["url"].(string))
+	warpType := string(data["warpType"].(string))
 	name := string(data["name"].(string))
 
 	newBuilding := building.NewBuilding(data)
@@ -80,7 +89,7 @@ func ParseBuildings(data map[string]interface{}) tl.Drawable {
 	// return warp point
 
 	// warpPoint := building.NewWarppoint(xPos, yPos, url)
-	warpPoint := building.NewWarppoint(xPos-1, yPos+3, url)
+	warpPoint := building.NewWarppoint(xPos-1, yPos+3, url, warpType)
 	Use(warpPoint, xPos, yPos)
 	Use(xPos, yPos, url)
 

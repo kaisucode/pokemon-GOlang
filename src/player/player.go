@@ -58,7 +58,13 @@ func (player *Player) Collide(collision tl.Physical) {
 		collidedWarppoint, _ := collision.(building.Warppoint)
 		Use(collidedWarppoint)
 		constants.CONSOLE_TEXT.SetText("collided with warpPoint going to url: " + collidedWarppoint.Url)
-		maploader.LoadRoom(collidedWarppoint.Url)
+
+		if collidedWarppoint.Type == "room" {
+			maploader.LoadRoom(collidedWarppoint.Url)
+		} else if collidedWarppoint.Type == "map" {
+			maploader.LoadMapLevel(collidedWarppoint.Url)
+		}
+
 		player.SetPosition(1, 1)
 		constants.CURLEVEL.AddEntity(player)
 		constants.GAME.Screen().SetLevel(constants.CURLEVEL)

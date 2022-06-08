@@ -1,14 +1,15 @@
 [
 		{
 			"type": "Room",
-			"url": "assets/maps/town1.json",
 			"data": {
 				"name": "Starting Town Pokemon Center",
 				"x": -30,
 				"y": -10,
 				"width": 60,
 				"height": 20,
-				"color": 91
+				"color": 91,
+				"url": "assets/maps/town1.json",
+				"warpType": "map"
 			}
 		},
     {
